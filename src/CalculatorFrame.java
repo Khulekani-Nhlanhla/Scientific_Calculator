@@ -20,6 +20,34 @@ public class CalculatorFrame extends JFrame implements ActionListener {
         "log", "x^y", "π", "C"
     };
 
+    private final JButton[] buttons = new JButton[buttonLabels.length];
+
+    public CalculatorFrame() {
+        setTitle("Scientific Calculator");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(400, 500);
+        setLayout(new BorderLayout());
+
+        display = new JTextField();
+        display.setFont(new Font("Arial", Font.BOLD, 22));
+        display.setEditable(false);
+        add(display, BorderLayout.NORTH);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(6,4, 5, 5));
+
+        for (int i = 0; i < buttonLabels.length; i++) {
+            buttons[i] = new JButton(buttonLabels[i]);
+            buttons[i].setFont(new Font("Arial", Font.BOLD, 16));
+            buttons[i].addActionListener(this);
+            buttonPanel.add(buttons[i]);
+        }
+
+        add(buttonPanel, BorderLayout.CENTER);
+        setVisible(true);
+    }
+
+
 
 
 

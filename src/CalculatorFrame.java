@@ -47,7 +47,76 @@ public class CalculatorFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
 
+        try {
+            switch (command) {
+                case "C":
+                    display.setText("");
+                    num1 = num2 = result = 0;
+                    break;
+
+                case "+":
+                case "-":
+                case "*":
+                case "/":
+                case "x^y":
+                    num1 = Double.parseDouble(display.getText());
+                    operator = command.charAt(0);
+                    display.setText("");
+                    break;
+
+                case "=":
+                    num2 = Double.parseDouble(display.getText());
+                    switch (operator) {
+                        case '+': result = num1 + num2; break;
+                        case '-': result = num1 - num2; break;
+                        case '*': result = num1 * num2; break;
+                        case '/': result = num1 / num2; break;
+                        case 'x': result = Math.pow(num1,num2); break;
+                    }
+                    display.setText(df.format(result));
+                    break;
+
+                case "sin":
+                    result = Math.sin(Math.toRadians(Double.parseDouble(display.getText())));
+                    display.setText(df.format(result));
+                    break;
+
+                case "cos":
+                    result = Math.cos(Math.toRadians(Double.parseDouble(display.getText())));
+                    display.setText(df.format(result));
+                    break;
+
+                case "tan":
+                    result = Math.tan(Math.toRadians(Double.parseDouble(display.getText())));
+                    display.setText(df.format(result));
+                    break;
+
+                case "√":
+                    result = Math.sqrt(Double.parseDouble(display.getText()));
+                    display.setText(df.format(result));
+                    break;
+
+                case "log":
+                    result = Math.log10(Math.toRadians(Double.parseDouble(display.getText())));
+                    display.setText(df.format(result));
+                    break;
+
+                case "π":
+                    display.setText(String.valueOf(Math.PI));
+                    break;
+
+                default:
+                    display.setText(display.getText() + command);
+                    break;
+            }
+        }catch (Exception ex){
+            display.setText("Error");
+        }
+    }
 
 
 
